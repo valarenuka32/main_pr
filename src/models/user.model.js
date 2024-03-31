@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const config = require("../config/config");
 
 const userSchema = new mongoose.Schema(
     {
@@ -14,6 +15,10 @@ const userSchema = new mongoose.Schema(
             type: String,
             trim: true
         },
+        image: {
+            type: String,
+            trim: true
+        },
         status: {
             type: Boolean,
             default: true
@@ -22,7 +27,14 @@ const userSchema = new mongoose.Schema(
     },
     {
         timestamps: true,
-        versionKey: false
+        versionKey: false,
+        toJSON: {
+            transform: function (doc, data) {
+                if (data?.image) {
+                    data.image = `${config.base_url}image/${data.image}`;
+                }
+            }
+        }
     }
 
 );

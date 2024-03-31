@@ -5,6 +5,12 @@ const createUser = async (req, res) => {
     try {
         const reqBody = req.body;
 
+        if (req.file) {
+            reqBody.image = req.file.filename;
+        } else {
+            throw new Error("image is required!");
+        }
+
         const user = await userService.createUser(reqBody);
         res.status(200).json({
             success: true,
@@ -21,7 +27,7 @@ const createUser = async (req, res) => {
 
 const userList = async (req, res) => {
     try {
-        const getList = await userService.getList();
+        const getList = await userService.userList();
         res.status(200).json({
             success: true,
             message: "user list success",

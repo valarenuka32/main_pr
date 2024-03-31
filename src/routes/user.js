@@ -2,12 +2,14 @@ const express = require("express");
 const { userController } = require("../controller");
 const { userValidation } = require("../validations");
 const validate = require("../middlewares/validate");
+const { upload } = require("../middlewares/upload");
 
 const router = express.Router();
 
 // crate
 router.post(
     "/crate-user",
+    upload.single("image"),
     validate(userValidation.createUser),
     userController.createUser
 );
@@ -20,13 +22,13 @@ router.get(
 
 // delete recode
 router.delete(
-    "/delete:/userId",
+    "/delete/:userId",
     userController.deleteRecode
 );
 
 // update recode
 router.put(
-    "/update:/userId",
+    "/update/:userId",
     userController.updateRecode
 );
 
