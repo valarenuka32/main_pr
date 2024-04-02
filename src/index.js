@@ -14,8 +14,19 @@ app.use(bodyParser.json());
 // database connection
 connectDB();
 
+// ejs view templet
+app.set("view engine" ,"ejs");
+
 // routes
 app.use("/v1", routes);
+
+app.get("/", (req, res) => {
+    res.send("hello world");
+});
+
+app.get("/crate-user",(req,res)=>{
+    res.render("./crate-user")
+})
 
 // http srever
 const server = http.createServer(app);
