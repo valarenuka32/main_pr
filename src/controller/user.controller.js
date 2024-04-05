@@ -37,6 +37,23 @@ const userList = async (req, res) => {
         res.status(400).json({ success: false, message: error.message })
     }
 };
+
+// user search
+const userSearch = async (req, res) => {
+    try {
+        const key = req.params.key;
+
+        let data = await userService.searchUser(key);
+
+        res.status(200).json({
+            success: true,
+            message: "user done",
+            data: data
+        })
+    } catch (error) {
+        res.status(400).json({ success: false, message: error.message })
+    }
+}
 // user delete
 const deleteRecode = async (req, res) => {
     try {
@@ -78,5 +95,5 @@ const updateRecode = async (req, res) => {
     }
 }
 
-module.exports = { createUser, userList, deleteRecode, updateRecode };
+module.exports = { createUser, userList, userSearch, deleteRecode, updateRecode };
 

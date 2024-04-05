@@ -20,6 +20,11 @@ router.get(
     userController.userList
 );
 
+// search
+router.get(
+    "/search-user/:key",
+    userController.userSearch
+);
 // delete recode
 router.delete(
     "/delete/:userId",

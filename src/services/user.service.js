@@ -8,6 +8,10 @@ const userList = async (req, res) => {
     return user.find()
 };
 
+const searchUser = async (req, res) => {
+    return user.find({ $or: [{ Name }, { email }, { phone }] })
+};
+
 const getUserById = async (userId) => {
     return user.findById(userId)
 };
@@ -20,4 +24,4 @@ const updateRecode = async (userId, updateBody) => {
     return user.findByIdAndUpdate(userId, { $set: updateBody })
 };
 
-module.exports = { createUser, userList, getUserById, deleteRecode, updateRecode };
+module.exports = { createUser, userList, searchUser, getUserById, deleteRecode, updateRecode };

@@ -3,7 +3,7 @@ const config = require("../config/config");
 
 const userSchema = new mongoose.Schema(
     {
-        name: {
+        Name: {
             type: String,
             trim: true
         },
