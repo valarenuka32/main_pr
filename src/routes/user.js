@@ -22,7 +22,7 @@ router.get(
 
 // search
 router.get(
-    "/search-user/:key",
+    "/search-user",
     userController.userSearch
 );
 // delete recode
