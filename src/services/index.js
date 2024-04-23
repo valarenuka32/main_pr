@@ -1,2 +1,1 @@
-module.exports.userServices = require("./user.service");
-// module.exports.adminServices = require("./admin.service");
+module.exports.adminServices = require("./admin.service");

@@ -1,30 +1,38 @@
-// const { admin } = require("../models");
+const { admin } = require("../models");
 
+const createadmin = async (reqbody) => {
+    return admin.create(reqbody);
+};
 
-// const createadmin = async (reqbody) => {
-//     return admin.create(reqbody);
-// };
+const registerAdmin = async (body) => {
+    return admin.create(body);
+};
 
-// const adminList = (req, res) => {
-//     return admin.find()
-//         .populate("admin");
-// };
+const getAdminByEmail=async(email)=>{
+return admin.findOne({email});
+};
 
-// const deleteRecode = async (adminId) => {
-//     return admin.findByIdAndDelete(adminId);
-// };
+const adminList = (req, res) => {
+    return admin.find();
+};
 
-// const updateRecode = async (adminId, updateBody) => {
-//     return admin.findByIdAndUpdate(adminId, { $set: updateBody });
-// };
+const deleteRecode = async (adminId) => {
+    return admin.findByIdAndDelete(adminId);
+};
 
-// const getadminById = async (adminId) => {
-//     return admin.findById(adminId);
-// };
-// module.exports = {
-//     createadmin,
-//     adminList,
-//     deleteRecode,
-//     updateRecode,
-//     getadminById
-// };
+const updateRecode = async (adminId, updateBody) => {
+    return admin.findByIdAndUpdate(adminId, { $set: updateBody });
+};
+
+const getadminById = async (adminId) => {
+    return admin.findById(adminId);
+};
+module.exports = {
+    registerAdmin,
+    getAdminByEmail,
+    createadmin,
+    adminList,
+    deleteRecode,
+    updateRecode,
+    getadminById
+};
