@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken')
 
 
 const createToken = (data) => {
-    return jwt.sign(data, process.env.SECRET)
+    return jwt.sign(data,process.env.SECRET)
 }
 
 const autheticate = (req, res, next) => {
@@ -15,10 +15,10 @@ const autheticate = (req, res, next) => {
         res.status(400).json({ message: "you are not login" })
     }
 
-    let user = jwt.verify(token, process.env.SECRET)
-    console.log(user);
+    let admin = jwt.verify(token, process.env.SECRET)
+    console.log(admin);
 
-    req.user = user
+    req.admin = admin
     next()
 
 };

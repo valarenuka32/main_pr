@@ -37,16 +37,16 @@ const registerAdmin = async (req, res) => {
 
 const loginAdmin = async (req, res) => {
     try {
-        let body = req.body;
+        const reqBody = req.body;
 
-        const admin = await adminServices.findAdmin(body.email);
+        const admin = await adminServices.findAdmin(reqBody.email)
 
         if (!admin) {
-            res.status(400).json({ message: "admin not found" })
+            throw new Error("admin not found")
         }
 
-        if (body.password != admin.password) {
-            res.status(400).json({ message: "password invalid" })
+        if (reqBody.password != admin.password) {
+            res.status(400).json({ message: 'password invalid' })
         }
 
         let data = {
@@ -54,12 +54,17 @@ const loginAdmin = async (req, res) => {
             password: admin.password
         }
 
-        let token = createToken(data)
+        let token = createToken(data);
+        console.log(token);
 
         res.cookie('token', token)
-        res.status(200).json({ message: "admin login success" })
-    } catch (error) {
+        res.status(200).json({ message: "login success..." })
 
+    } catch (error) {
+        res.status(400).json({
+            success: false,
+            message: error.message
+        })
     }
 }
 
@@ -148,8 +153,8 @@ const deleteRecode = async (req, res) => {
 };
 
 module.exports = {
-    loginAdmin,
     registerAdmin,
+    loginAdmin,
     createadmin,
     adminList,
     deleteRecode,
