@@ -1,5 +1,6 @@
 const { adminServices } = require("../services");
-const { createToken } = require("../middleware/auth")
+const { createToken } = require("../middleware/auth");
+
 // admin register
 const registerAdmin = async (req, res) => {
     try {
@@ -27,7 +28,6 @@ const registerAdmin = async (req, res) => {
         } else {
             res.status(400).json({ message: 'pasword does not mathc', success: false })
         };
-
     } catch (error) {
         res.status(400).json({ success: false, message: error.message })
     }
@@ -37,15 +37,16 @@ const registerAdmin = async (req, res) => {
 
 const loginAdmin = async (req, res) => {
     try {
-        const reqBody = req.body;
+        const body = req.body;
+        console.log(body);
 
-        const admin = await adminServices.findAdmin(reqBody.email)
+        const admin = await adminServices.findAdmin(body.email)
 
         if (!admin) {
             throw new Error("admin not found")
         }
 
-        if (reqBody.password != admin.password) {
+        if (body.password != admin.password) {
             res.status(400).json({ message: 'password invalid' })
         }
 
@@ -66,8 +67,9 @@ const loginAdmin = async (req, res) => {
             message: error.message
         })
     }
-}
+};
 
+// crate
 const createadmin = async (req, res) => {
     try {
         const reqBody = req.body;
