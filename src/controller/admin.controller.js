@@ -1,5 +1,5 @@
 const { adminServices } = require("../services");
-
+const { createToken } = require("../middleware/auth")
 // admin register
 const registerAdmin = async (req, res) => {
     try {
@@ -35,7 +35,33 @@ const registerAdmin = async (req, res) => {
 
 // login admin
 
+const loginAdmin = async (req, res) => {
+    try {
+        let body = req.body;
 
+        const admin = await adminServices.findAdmin(body.email);
+
+        if (!admin) {
+            res.status(400).json({ message: "admin not found" })
+        }
+
+        if (body.password != admin.password) {
+            res.status(400).json({ message: "password invalid" })
+        }
+
+        let data = {
+            email: admin.email,
+            password: admin.password
+        }
+
+        let token = createToken(data)
+
+        res.cookie('token', token)
+        res.status(200).json({ message: "admin login success" })
+    } catch (error) {
+
+    }
+}
 
 const createadmin = async (req, res) => {
     try {
@@ -122,6 +148,7 @@ const deleteRecode = async (req, res) => {
 };
 
 module.exports = {
+    loginAdmin,
     registerAdmin,
     createadmin,
     adminList,

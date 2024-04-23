@@ -8,8 +8,11 @@ const registerAdmin = async (body) => {
     return admin.create(body);
 };
 
-const getAdminByEmail=async(email)=>{
-return admin.findOne({email});
+const getAdminByEmail = async (email) => {
+    return admin.findOne({ email });
+};
+const findAdmin = async (email) => {
+    return admin.findOne({ email });
 };
 
 const adminList = (req, res) => {
@@ -30,6 +33,7 @@ const getadminById = async (adminId) => {
 module.exports = {
     registerAdmin,
     getAdminByEmail,
+    findAdmin,
     createadmin,
     adminList,
     deleteRecode,
