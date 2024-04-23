@@ -1,6 +1,5 @@
 const { adminServices } = require("../services");
-const { createToken } = require("../middleware/auth");
-
+const { createToken } = require("../middleware/auth")
 // admin register
 const registerAdmin = async (req, res) => {
     try {
@@ -12,10 +11,6 @@ const registerAdmin = async (req, res) => {
             password: req.body.password,
             confirm_password: req.body.confirm_password
         }
-        const adminEx = await adminServices.getAdminByEmail(body.email);
-        if (adminEx) {
-            throw new Error("admin already created by this email")
-        };
 
         const admin = await adminServices.registerAdmin(reqBody);
 
@@ -50,16 +45,16 @@ const loginAdmin = async (req, res) => {
             res.status(400).json({ message: 'password invalid' })
         }
 
-        let data = {
-            email: admin.email,
-            password: admin.password
-        }
+        // let data = {
+        //     email: admin.email,
+        //     password: admin.password
+        // }
 
-        let token = createToken(data);
-        console.log(token);
+        // let token = createToken(data);
+        // console.log(token);
 
-        res.cookie('token', token)
-        res.status(200).json({ message: "login success..." })
+        // res.cookie('token', token)
+        // res.status(200).json({ message: "login success..." })
 
     } catch (error) {
         res.status(400).json({
