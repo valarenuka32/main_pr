@@ -4,8 +4,8 @@ const createadmin = async (reqbody) => {
     return admin.create(reqbody);
 };
 
-const registerAdmin = async (body) => {
-    return admin.create(body);
+const registerAdmin = async (reqBody) => {
+    return admin.create(reqBody);
 };
 
 const getAdminByEmail = async (email) => {

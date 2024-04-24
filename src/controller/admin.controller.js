@@ -5,12 +5,19 @@ const registerAdmin = async (req, res) => {
     try {
         const reqBody = req.body;
 
+        const userEx=await adminServices.getAdminByEmail(reqBody.email);
+        if(userEx){
+            throw new Error("user already created by this email")
+        };
+
         let body = {
             username: req.body.username,
             email: req.body.email,
             password: req.body.password,
             confirm_password: req.body.confirm_password
         }
+
+       
 
         const admin = await adminServices.registerAdmin(reqBody);
 
