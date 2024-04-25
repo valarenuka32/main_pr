@@ -17,8 +17,6 @@ const registerAdmin = async (req, res) => {
             confirm_password: req.body.confirm_password
         }
 
-       
-
         const admin = await adminServices.registerAdmin(reqBody);
 
         if (body.password === body.confirm_password) {
@@ -156,12 +154,29 @@ const deleteRecode = async (req, res) => {
     }
 };
 
+// sreching
+const search=async(req,res)=>{
+
+    (req.params.key);
+    
+    let data=await adminServices.find(
+        {
+            "$or":[
+                {"username":{$regex:req.params.key}},
+                {"email":{$regex:req.params.key}},
+            ]
+        }
+    )
+    res.send(data);
+};
+
 module.exports = {
     registerAdmin,
     loginAdmin,
     createadmin,
     adminList,
     deleteRecode,
-    updateRecode
+    updateRecode,
+    search
 };
 
