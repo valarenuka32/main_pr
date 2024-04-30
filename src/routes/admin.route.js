@@ -39,6 +39,6 @@ router.delete(
     adminController.deleteRecode
 );
 
-router.get("/searech/:key",adminController.search)
+router.get('/search', adminController.search);
 
 module.exports = router;

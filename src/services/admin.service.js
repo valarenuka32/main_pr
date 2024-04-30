@@ -8,7 +8,7 @@ const registerAdmin = async (reqBody) => {
   return admin.create(reqBody);
 };
 
-const getAdminByEmail = async (email) => {
+const getEmailById = async (email) => {
   return admin.findOne({ email });
 };
 const findAdmin = async (email) => {
@@ -31,22 +31,25 @@ const getadminById = async (adminId) => {
   return admin.findById(adminId);
 };
 
-const search = async () => {
-  return admin.find({
-    $or: [
-      { username: { $regex: req.params.key } },
-      { email: { $regex: req.params.key } },
-    ],
-  });
-};
+// const findadmin=async()=>{
+//   return admin.findOne()
+// }
+// const search = async () => {
+//   return admin.find({
+//     $or: [
+//       { username: { $regex: req.params.key } },
+//       { email: { $regex: req.params.key } },
+//     ],
+//   });
+// };
 module.exports = {
   registerAdmin,
-  getAdminByEmail,
+  getEmailById,
   findAdmin,
   createadmin,
   adminList,
   deleteRecode,
   updateRecode,
-  getadminById,
-  search
+  getadminById
+  // findadmin
 };
